@@ -1,0 +1,236 @@
+<!-- your_template.html -->
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    /* Add this CSS to your existing stylesheet or create a new one */
+
+.container {
+  max-width: 800px;
+  margin-top: 2rem;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  border-collapse: collapse;
+}
+
+.table td,
+.table th {
+  padding: 1rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.row {
+  margin-top: 1rem;
+}
+
+/* Optional: Add some styling for responsive design */
+@media (max-width: 767.98px) {
+  .table td,
+  .table th {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+</style>
+<div class="container mt-2">
+    
+    
+    <h2 class="mb-4">Create Student </h2>
+    <form method="post" action="{% url 'create_student' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        
+        <!-- <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="{{ form.name.id_for_label }}" class="form-label">{{ form.name.label }}</label>
+                        {{ form.name }}
+                    </td>
+                    &ensp;
+                    <td>
+                        <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+                        {{ form.email }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ form.mobile_number.id_for_label }}" class="form-label">{{ form.mobile_number.label }}</label>
+                        {{ form.mobile_number }}
+                    </td>
+                    <td>
+                        <label for="{{ form.alternative_number.id_for_label }}" class="form-label">{{ form.alternative_number.label }}</label>
+                        {{ form.alternative_number }}
+                    </td>
+                    <td>
+                        <label for="{{ form.gender.id_for_label }}" class="form-label">{{ form.gender.label }}</label>
+                        {{ form.gender }}
+                    </td>  
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ form.graduation.id_for_label }}" class="form-label">{{ form.graduation.label }}</label>
+                        {{ form.graduation }}
+                    </td>
+                    <td>
+                        <label for="{{ form.course.id_for_label }}" class="form-label">{{ form.course.label }}</label>
+                        {{ form.course }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ form.date_of_joining.id_for_label }}" class="form-label">{{ form.date_of_joining.label }}</label>
+                        {{ form.date_of_joining }}
+                    </td>
+                    <td>
+                        <label for="{{ form.batch.id_for_label }}" class="form-label">{{ form.batch.label }}</label>
+                        {{ form.batch }}
+                    </td>
+                    <td>
+                        <label for="{{ form.admission_number.id_for_label }}" class="form-label">{{ form.admission_number.label }}</label>
+                        {{ form.admission_number }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="{{ form.trainer.id_for_label }}" class="form-label">{{ form.trainer.label }}</label>
+                        {{ form.trainer }}
+                        <select class="form-control" name="{{ form.trainer.name }}" id="{{ form.trainer.id_for_label }}">
+                            {% for trainer_option in form.trainer %}
+                                <option value="{{ trainer_option.name }}" {% if trainer_option.selected %}selected{% endif %}>
+                                    {{ trainer_option.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ form.status.id_for_label }}" class="form-label">{{ form.status.label }}</label>
+                        {{form.status}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ form.g_stream.id_for_label }}" class="form-label">{{ form.g_stream.label }}</label>
+                        {{form.g_stream}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ form.g_yop.id_for_label }}" class="form-label">{{ form.g_yop.label }}</label>
+                        {{form.g_yop}}
+                    </td>
+                </tr>                <tr>
+                    <td>
+                        <label for="{{ form.g_percentag.id_for_label }}" class="form-label">{{ form.g_percentag.label }}</label>
+                        {{form.g_percentag}}
+                    </td>
+                </tr>                <tr>
+                    <td>
+                        <label for="{{ form.intr_stream.id_for_label }}" class="form-label">{{ form.intr_stream.label }}</label>
+                        {{form.intr_stream}}
+                    </td>
+                </tr>                <tr>
+                    <td>
+                        <label for="{{ form.intr_percentag.id_for_label }}" class="form-label">{{ form.intr_percentag.label }}</label>
+                        {{form.intr_percentag}}
+                    </td>
+                </tr>                <tr>
+                    <td>
+                        <label for="{{ form.intr_yop.id_for_label }}" class="form-label">{{ form.intr_yop.label }}</label>
+                        {{form.intr_yop}}
+                    </td>
+                </tr>                <tr>
+                    <td>
+                        <label for="{{ form.ssc_percentag.id_for_label }}" class="form-label">{{ form.ssc_percentag.label }}</label>
+                        {{form.ssc_percentag}}
+                    </td>
+                </tr>                <tr>
+                    <td>
+                        <label for="{{ form.ssc_yop.id_for_label }}" class="form-label">{{ form.ssc_yop.label }}</label>
+                        {{form.ssc_yop}}
+                    </td>
+                </tr>                <tr>
+                    <td>
+                        <label for="{{ form.training_mode.id_for_label }}" class="form-label">{{ form.training_mode.label }}</label>
+                        {{form.training_mode}}
+                    </td>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+
+        <div class="row mt-3">
+            <div class="col-md-6 offset-md-3 text-center">
+                <input type="submit" class="btn btn-primary btn-block" value="Submit">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Function to update trainers based on the selected course
+        function updateTrainers() {
+            var courseId = $('#id_course').val();
+
+            $.ajax({
+                url: '/get_trainers/',  // Replace with your URL to fetch trainers
+                method: 'GET',
+                data: {'course_id': courseId},
+                success: function(data) {
+                    console.log(data);  // Add this line for debugging
+                    $('#id_trainer').empty();
+                    $.each(data.trainers, function(key, value) {
+                        $('#id_trainer').append($('<option>', {
+                            value: value.id,
+                            text: value.name
+                        }));
+                    });
+                }
+            });
+        }
+
+        // Call the function on page load and when the course dropdown changes
+        updateTrainers();
+        $('#id_course').change(updateTrainers);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'home/homepage.html' %}
+
+{% block content %}
+<!-- templates/registration/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <h1>Registration Page</h1>
+    
+    <form method="post" action="{% url 'regurl' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
+{% endblock %}
